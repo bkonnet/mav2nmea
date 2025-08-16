@@ -1,0 +1,16 @@
+[Unit]
+Description=MAVLink → NMEA bridge
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/mav2nmea
+ExecStart=/opt/mav2nmea/venv/bin/python /opt/mav2nmea/mav2nmea.py
+Restart=always
+User=ahugo
+Environment=MAVLINK_UDP_PORT=14552
+Environment=NMEA_TCP_PORT=10110
+Environment=NMEA_UDP_TARGETS=192.168.1.255:10110
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
